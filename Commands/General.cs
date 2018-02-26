@@ -9,12 +9,16 @@ namespace simbot.Commands
         [Command("twitch")]
         public async Task Twitch(CommandContext context)
         {
+            Log.Console.LogCommand("twitch", context);
+
             await context.RespondAsync($"Leios' Twitch channel: https://www.twitch.tv/simuleios");
         }
 
         [Command("youtube")]
         public async Task Youtube(CommandContext context)
         {
+            Log.Console.LogCommand("youtube", context);
+
             await context.RespondAsync($"Leios' YouTube channel: https://www.youtube.com/user/LeiosOS");
         }
     }

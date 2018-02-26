@@ -27,6 +27,7 @@ namespace simbot
             commands.RegisterCommands<Commands.General>();
             commands.RegisterCommands<Commands.Twitch>();
 
+            Log.Console.Log(Log.Category.Discord, "Connecting to Discord...");
             await discord.ConnectAsync();
             await Task.Delay(-1);
         }

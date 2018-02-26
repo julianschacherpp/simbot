@@ -21,16 +21,21 @@ namespace simbot.Twitch
 
         public void Connect()
         {
-            client = new TwitchClient(credentials, Config.GetTwitchChannelName(),logging: true);
+            client = new TwitchClient(credentials, Config.GetTwitchChannelName(),logging: false);
+
+            client.OnConnected += Client_OnConnected;
 
             client.Connect();
         }
 
         public void Disconnect() => client.Disconnect();
 
+        private void Client_OnConnected(object sender, OnConnectedArgs e) => Log.Console.Log(Log.Category.Twitch, "Connected to the Twitch Chat.");
+
         public void SendMessage(string message)
         {
             client.SendMessage(message);
+            Log.Console.Log(Log.Category.Twitch, $"Sent message: \"{message}\"");
         }
     }
 }

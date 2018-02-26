@@ -18,12 +18,16 @@ namespace simbot.Commands
         [Command("tm")]
         public async Task Tm(CommandContext context)
         {
+            Log.Console.LogCommand("tm", context);
+
             chat.SendMessage($"{context.Message.Author.Username}: {context.RawArgumentString.TrimStart()}");
         }
 
         [Command("tma")]
         public async Task Tma(CommandContext context)
         {
+            Log.Console.LogCommand("tma", context);
+
             chat.SendMessage($"{context.RawArgumentString.TrimStart()} *{context.Message.Author.Username}");
         }
     }
