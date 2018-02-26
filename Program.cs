@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 
@@ -16,7 +15,7 @@ namespace simbot
         {
             discord = new DiscordClient(new DiscordConfiguration()
             {
-                Token = "",
+                Token = Credentials.GetDiscordToken(),
                 TokenType = TokenType.Bot
             });
 
