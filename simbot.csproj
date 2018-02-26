@@ -17,6 +17,7 @@
   <ItemGroup>
     <PackageReference Include="DSharpPlus" Version="3.2.3" />
     <PackageReference Include="DSharpPlus.CommandsNext" Version="3.2.3" />
+    <PackageReference Include="TwitchLib" Version="1.6.1" />
   </ItemGroup>
 
 </Project>
