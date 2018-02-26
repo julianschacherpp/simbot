@@ -2,9 +2,9 @@ using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 
-namespace simbot
+namespace simbot.Commands
 {
-    public class Commands
+    public class General
     {
         [Command("twitch")]
         public async Task Twitch(CommandContext context)

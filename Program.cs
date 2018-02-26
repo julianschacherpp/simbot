@@ -24,7 +24,8 @@ namespace simbot
                 StringPrefix = "!"
             });
 
-            commands.RegisterCommands<Commands>();
+            commands.RegisterCommands<Commands.General>();
+            commands.RegisterCommands<Commands.Twitch>();
 
             await discord.ConnectAsync();
             await Task.Delay(-1);
