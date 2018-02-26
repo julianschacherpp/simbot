@@ -6,7 +6,7 @@ namespace simbot.Commands
 {
     public class General
     {
-        [Command("twitch")]
+        [Command("twitch"), Description("Returns the URL of Leios' Twitch channel.")]
         public async Task Twitch(CommandContext context)
         {
             Log.Console.LogCommand("twitch", context);
@@ -14,7 +14,7 @@ namespace simbot.Commands
             await context.RespondAsync($"Leios' Twitch channel: https://www.twitch.tv/simuleios");
         }
 
-        [Command("youtube")]
+        [Command("youtube"), Description("Returns the URL of Leios' YouTube channel.")]
         public async Task Youtube(CommandContext context)
         {
             Log.Console.LogCommand("youtube", context);
