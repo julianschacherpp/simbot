@@ -15,7 +15,7 @@ namespace simbot
         {
             discord = new DiscordClient(new DiscordConfiguration()
             {
-                Token = Credentials.GetDiscordToken(),
+                Token = Config.GetDiscordToken(),
                 TokenType = TokenType.Bot
             });
 
