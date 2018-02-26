@@ -20,5 +20,11 @@ namespace simbot.Commands
         {
             chat.SendMessage($"{context.Message.Author.Username}: {context.RawArgumentString.TrimStart()}");
         }
+
+        [Command("tma")]
+        public async Task Tma(CommandContext context)
+        {
+            chat.SendMessage($"{context.RawArgumentString.TrimStart()} *{context.Message.Author.Username}");
+        }
     }
 }
