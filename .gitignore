@@ -1,5 +1,8 @@
 # Configuration
-Config.xml
+Config.json
+
+# TwitchNotificationUsers
+TwitchNotificationUsers.json
 
 # Created by https://www.gitignore.io/api/linux,macos,csharp,windows,visualstudio,visualstudiocode
 

@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 
-namespace simbot.Commands
+namespace simbot.Discord.Commands
 {
     public class General
     {

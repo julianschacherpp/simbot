@@ -1,11 +1,14 @@
 ﻿using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
+using simbot;
 
 namespace simbot
 {
-    class Program
+    public class Program
     {
+        static string configPath = "Config.json";
+        static Config.Config config;
         static DiscordClient discord;
         static CommandsNextModule commands;
 
@@ -13,19 +16,33 @@ namespace simbot
 
         static async Task MainAsync(string[] args)
         {
+            config = await Config.Config.LoadAsync(configPath);
+
             discord = new DiscordClient(new DiscordConfiguration()
             {
-                Token = Config.GetDiscordToken(),
+                Token = config.Discord.Token,
                 TokenType = TokenType.Bot
             });
 
+            DependencyCollection dep = null;
+            using (var d = new DependencyCollectionBuilder())
+            {
+                d.AddInstance(new Discord.Dependencies()
+                {
+                    DiscordClient = discord,
+                    Config = config
+                });
+                dep = d.Build();
+            }
+
             commands = discord.UseCommandsNext(new CommandsNextConfiguration()
             {
-                StringPrefix = "!"
+                StringPrefix = "!",
+                Dependencies = dep
             });
 
-            commands.RegisterCommands<Commands.General>();
-            commands.RegisterCommands<Commands.Twitch>();
+            commands.RegisterCommands<Discord.Commands.General>();
+            commands.RegisterCommands<Discord.Commands.Twitch>();
 
             Log.Console.Log(Log.Category.Discord, "Connecting to Discord...");
             await discord.ConnectAsync();
