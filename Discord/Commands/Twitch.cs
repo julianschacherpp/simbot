@@ -19,7 +19,7 @@ namespace simbot.Discord.Commands
             chat.Connect();
         }
 
-        [Command("tm"), Description("Writes the input after the command call to the simuleios Twitch chat. This happens in the following format: \"[DiscordUserName]: [input]\".")]
+        [Command("TwitchMessage"), Aliases("tm"), Description("Writes the input after the command call to the simuleios Twitch chat. This happens in the following format: \"[DiscordUserName]: [input]\".")]
         public async Task Tm(CommandContext context)
         {
             Log.Console.LogCommand("tm", context);
@@ -27,7 +27,7 @@ namespace simbot.Discord.Commands
             chat.SendMessage($"{context.Message.Author.Username}: {context.RawArgumentString.TrimStart()}");
         }
 
-        [Command("tma"), Description("Writes the input after the command call to the simuleios Twitch chat. This command should be used, if you want to trigger Twitch commands, since the input is written first. So the format in the Twitch chat is the following: \"[input] *[DiscordUserName]\".")]
+        [Command("TwitchMessageAfter"), Aliases("tma"), Description("Writes the input after the command call to the simuleios Twitch chat. This command should be used, if you want to trigger Twitch commands, since the input is written first. So the format in the Twitch chat is the following: \"[input] *[DiscordUserName]\".")]
         public async Task Tma(CommandContext context)
         {
             Log.Console.LogCommand("tma", context);
@@ -35,7 +35,7 @@ namespace simbot.Discord.Commands
             chat.SendMessage($"{context.RawArgumentString.TrimStart()} *{context.Message.Author.Username}");
         }
 
-        [Command("ttcn"), Aliases("ToggleTwitchChatNotifications"), Description("Toggles whether or not you get notified, when someone in the Twitch chat sends a message, that contains the name of the bot and your name.")]
+        [Command("ToggleTwitchChatNotifications"), Aliases("ttcn"), Description("Toggles whether or not you get notified, when someone in the Twitch chat sends a message, that contains the name of the bot and your name.")]
         public async Task ToggleTwitchChatNotifications(CommandContext context)
         {
             Log.Console.LogCommand("ToggleTwitchChatNotifications", context);

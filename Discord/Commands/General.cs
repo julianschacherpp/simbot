@@ -6,7 +6,7 @@ namespace simbot.Discord.Commands
 {
     public class General
     {
-        [Command("twitch"), Description("Returns the URL of Leios' Twitch channel.")]
+        [Command("Twitch"), Aliases("tw"), Description("Returns the URL of Leios' Twitch channel.")]
         public async Task Twitch(CommandContext context)
         {
             Log.Console.LogCommand("twitch", context);
@@ -14,7 +14,7 @@ namespace simbot.Discord.Commands
             await context.RespondAsync($"Leios' Twitch channel: https://www.twitch.tv/simuleios");
         }
 
-        [Command("youtube"), Description("Returns the URL of Leios' YouTube channel.")]
+        [Command("YouTube"), Aliases("yt"), Description("Returns the URL of Leios' YouTube channel.")]
         public async Task Youtube(CommandContext context)
         {
             Log.Console.LogCommand("youtube", context);

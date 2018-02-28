@@ -38,6 +38,7 @@ namespace simbot
             commands = discord.UseCommandsNext(new CommandsNextConfiguration()
             {
                 StringPrefix = "!",
+                CaseSensitive = false,
                 Dependencies = dep
             });
 
