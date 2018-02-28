@@ -20,17 +20,17 @@ namespace simbot.Discord.Commands
         }
 
         [Command("TwitchMessage"), Aliases("tm"), Description("Writes the input after the command call to the simuleios Twitch chat. This happens in the following format: \"[DiscordUserName]: [input]\".")]
-        public async Task Tm(CommandContext context)
+        public async Task TwitchMessage(CommandContext context)
         {
-            Log.Console.LogCommand("tm", context);
+            Log.Console.LogCommand("TwitchMessage", context);
 
             chat.SendMessage($"{context.Message.Author.Username}: {context.RawArgumentString.TrimStart()}");
         }
 
         [Command("TwitchMessageAfter"), Aliases("tma"), Description("Writes the input after the command call to the simuleios Twitch chat. This command should be used, if you want to trigger Twitch commands, since the input is written first. So the format in the Twitch chat is the following: \"[input] *[DiscordUserName]\".")]
-        public async Task Tma(CommandContext context)
+        public async Task TwitchMessageAfter(CommandContext context)
         {
-            Log.Console.LogCommand("tma", context);
+            Log.Console.LogCommand("TwitchMessageAfter", context);
 
             chat.SendMessage($"{context.RawArgumentString.TrimStart()} *{context.Message.Author.Username}");
         }
