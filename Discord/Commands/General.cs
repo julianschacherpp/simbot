@@ -21,5 +21,13 @@ namespace simbot.Discord.Commands
 
             await context.RespondAsync($"Leios' YouTube channel: https://www.youtube.com/user/LeiosOS");
         }
+
+        [Command("ArcaneAlgorithmArchive"), Aliases("aaa"), Description("Returns the URL of the Arcane Algorithm Archive.")]
+        public async Task ArcaneAlgorithmArchive(CommandContext context)
+        {
+            Log.Console.LogCommand("ArcaneAlgorithmArchive", context);
+
+            await context.RespondAsync($"The Arcane Algorithm Archive: https://www.gitbook.com/book/leios/algorithm-archive/details");
+        }
     }
 }
