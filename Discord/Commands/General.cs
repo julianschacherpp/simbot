@@ -29,5 +29,13 @@ namespace simbot.Discord.Commands
 
             await context.RespondAsync($"The Arcane Algorithm Archive: https://www.gitbook.com/book/leios/algorithm-archive/details");
         }
+
+        [Command("ArcaneAlgorithmArchiveDev"), Aliases("aaadev"), Description("Returns the URL of the Arcane Algorithm Archive's GitHub repository.")]
+        public async Task ArcaneAlgorithmArchiveDev(CommandContext context)
+        {
+            Log.Console.LogCommand("ArcaneAlgorithmArchiveDev", context);
+
+            await context.RespondAsync($"The Arcane Algorithm Archive's GitHub repo: https://github.com/leios/algorithm-archive");
+        }
     }
 }
