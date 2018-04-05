@@ -3,9 +3,13 @@ using simbot;
 
 namespace simbot.Discord
 {
-    public class Dependencies
+    public class TwitchCommunicationDependencies
     {
-        internal DiscordClient DiscordClient { get; set; }
-        internal Config.Config Config { get; set; }
+        internal Twitch.Client Client { get; set; }
+    }
+
+    public class TwitchInfoDependencies
+    {
+        internal Twitch.Api Api { get; set; }
     }
 }

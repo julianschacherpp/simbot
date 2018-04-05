@@ -7,6 +7,7 @@ namespace simbot.Config
     public class Discord
     {
         public string Token { get; set; }
+        public ulong MainChatChannel { get; set; }
         public ulong TwitchChatChannel { get; set; }
     }
 
@@ -14,6 +15,7 @@ namespace simbot.Config
     {
         public string Username { get; set; }
         public string ChannelName { get; set; }
+        public string ChannelId { get; set; }
         public string ClientId { get; set; }
         public string AccessToken { get; set; }
     }
