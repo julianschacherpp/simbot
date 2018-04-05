@@ -12,4 +12,10 @@ namespace simbot.Discord
     {
         internal Twitch.Api Api { get; set; }
     }
+
+    public class TwitchCommandManagementDependencies
+    {
+        internal Twitch.Client Client { get; set; }
+        internal Config.Config Config { get; set; }
+    }
 }

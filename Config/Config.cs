@@ -6,6 +6,8 @@ namespace simbot.Config
 {
     public class Discord
     {
+        public ulong BotCreator { get; set; }
+        public ulong Streamer { get; set; }
         public string Token { get; set; }
         public ulong MainChatChannel { get; set; }
         public ulong TwitchChatChannel { get; set; }

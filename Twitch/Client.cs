@@ -17,8 +17,8 @@ namespace simbot.Twitch
         private TwitchClient twitchClient;
         private Api api; 
         private DiscordClient discordClient;
-        public NotificationUsers notificationUsers { get; set; }
-
+        public NotificationUsers NotificationUsers { get; set; }
+        public DynamicCommands DynamicCommands { get; set; }
         public Client(DiscordClient discordClient, Api api, Config.Config config)
         {
             this.config = config;
@@ -28,7 +28,8 @@ namespace simbot.Twitch
             );
             this.discordClient = discordClient;
             this.api = api;
-            notificationUsers = new NotificationUsers();
+            NotificationUsers = new NotificationUsers();
+            DynamicCommands = new DynamicCommands();
         }
 
         public void Connect()
@@ -64,7 +65,7 @@ namespace simbot.Twitch
             DiscordChannel discordChannel;
             discordChannel = await discordClient.GetChannelAsync((ulong)config.Discord.TwitchChatChannel);
 
-            foreach(var user in notificationUsers.Users)
+            foreach(var user in NotificationUsers.Users)
             {
                 if (e.ChatMessage.Message.ToLower().Contains(user.Value.Username.ToLower()) && user.Value.EnableNotifications)
                     await discordClient.SendMessageAsync(discordChannel, $"<@{user.Key}> Twitch message: \"{e.ChatMessage.Message}\" by {e.ChatMessage.DisplayName}");
@@ -72,6 +73,14 @@ namespace simbot.Twitch
         }
         private async Task HandleCommands(string command)
         {
+            foreach (var dynamicCommand in DynamicCommands.Commands)
+            {
+                if (command == dynamicCommand.Command)
+                {
+                    SendMessage(dynamicCommand.Answer);
+                }
+            }
+
             if (command == "uptime")
             {
                 var uptime = await api.Uptime();

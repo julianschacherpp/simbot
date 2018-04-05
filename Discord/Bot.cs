@@ -40,6 +40,11 @@ namespace simbot.Discord
                 {
                     Api = twitch.Api
                 });
+                d.AddInstance(new Discord.TwitchCommandManagementDependencies()
+                {
+                    Client = twitch.Client,
+                    Config = config
+                });
                 dep = d.Build();
             }
 
@@ -53,6 +58,7 @@ namespace simbot.Discord
             commands.RegisterCommands<Discord.Commands.General>();
             commands.RegisterCommands<Discord.Commands.TwitchCommunication>();
             commands.RegisterCommands<Discord.Commands.TwitchInfo>();
+            commands.RegisterCommands<Discord.Commands.TwitchCommandManagement>();
         }
 
         public async Task StartAsync()

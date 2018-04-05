@@ -39,12 +39,12 @@ namespace simbot.Discord.Commands
         {
             Log.Console.LogCommand("ToggleTwitchChatNotifications", context);
             
-            var result = client.notificationUsers.ToggleGetEnableNotifications(context.User.Id);
+            var result = client.NotificationUsers.ToggleGetEnableNotifications(context.User.Id);
             System.Console.WriteLine(await result == null);
 
             if (await result == null)
             {
-                await client.notificationUsers.AddUserAsync(context.User.Id, context.User.Username, true);
+                await client.NotificationUsers.AddUserAsync(context.User.Id, context.User.Username, true);
                 await context.RespondAsync("Twitch chat notifications have been enabled.");
             }
             else if (await result == true)

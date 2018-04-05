@@ -4,6 +4,9 @@ Config.json
 # TwitchNotificationUsers
 TwitchNotificationUsers.json
 
+# DynamicCommands
+DynamicCommands.json
+
 # .vscode
 .vscode
 
