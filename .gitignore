@@ -4,6 +4,9 @@ Config.json
 # TwitchNotificationUsers
 TwitchNotificationUsers.json
 
+# .vscode
+.vscode
+
 # Created by https://www.gitignore.io/api/linux,macos,csharp,windows,visualstudio,visualstudiocode
 
 ### Csharp ###
