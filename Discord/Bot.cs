@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
@@ -25,9 +27,9 @@ namespace simbot.Discord
                 TokenType = TokenType.Bot
             });
 
-            AddAllEventHandlers();
-
             twitch = new Twitch.Twitch(config, discord);
+
+            AddAllEventHandlers();
 
             DependencyCollection dep = null;
             using (var d = new DependencyCollectionBuilder())
@@ -63,7 +65,6 @@ namespace simbot.Discord
 
         public async Task StartAsync()
         {
-            lastIsOnlineState = await twitch.Api.IsOnline;
             Log.Console.Log(Log.Category.Discord, "Connecting to Discord...");
             await discord.ConnectAsync();
         }
@@ -76,30 +77,28 @@ namespace simbot.Discord
         private void AddAllEventHandlers()
         {
             discord.PresenceUpdated += PresenceUpdatedHandler;
+            twitch.Api.StreamerGoesOnline += StreamerGoesOnlineHandler;
+            twitch.Api.StreamerGoesOffline += StreamerGoesOfflineHandler;
         }
 
         private async Task PresenceUpdatedHandler(DSharpPlus.EventArgs.PresenceUpdateEventArgs e)
         {
-            // if (e.Member.Id == 357141789733421057)
-            if (e.Member.Id == 113417954699321344)
-            {
-                var isOnline = await twitch.Api.IsOnline;
+            if (e.Member.Id == config.Discord.Streamer)
+                await twitch.Api.PollStreamerOnlineStatus();
+        }
 
-                if (isOnline && !lastIsOnlineState)
-                {
-                    var message = "// Leios is live!";
-                    Log.Console.Log(Log.Category.Discord, message);
-                    await discord.SendMessageAsync(await discord.GetChannelAsync(mainChatChannel), message);
-                }
-                else if (!isOnline && lastIsOnlineState)
-                {
-                    var message = "// Leios is not live anymore.";
-                    Log.Console.Log(Log.Category.Discord, message);
-                    await discord.SendMessageAsync(await discord.GetChannelAsync(mainChatChannel), message);
-                }
+        private async Task StreamerGoesOnlineHandler()
+        {
+            var message = "// Leios is live!";
+            Log.Console.Log(Log.Category.Discord, message);
+            await discord.SendMessageAsync(await discord.GetChannelAsync(mainChatChannel), message);
+        }
 
-                lastIsOnlineState = await twitch.Api.IsOnline;
-            }
+        private async Task StreamerGoesOfflineHandler()
+        {
+            var message = "// Leios is not live anymore.";
+            Log.Console.Log(Log.Category.Discord, message);
+            await discord.SendMessageAsync(await discord.GetChannelAsync(mainChatChannel), message);
         }
     }
 }

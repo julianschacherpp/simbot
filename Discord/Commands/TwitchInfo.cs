@@ -21,7 +21,7 @@ namespace simbot.Discord.Commands
         {
             Log.Console.LogCommand("IsLive", context);
 
-            if (await api.IsOnline)
+            if (await api.CheckStreamerOnlineStatus())
                 await context.RespondAsync("Leios is live.");
             else
                 await context.RespondAsync("Leios is not live.");
