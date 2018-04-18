@@ -35,9 +35,11 @@ namespace simbot.Twitch
         public void Connect()
         {
             twitchClient = new TwitchClient(credentials, config.Twitch.ChannelName,logging: false);
+            twitchClient.AddChatCommandIdentifier('!');
 
             twitchClient.OnConnected += Client_OnConnected;
             twitchClient.OnMessageReceived += Client_OnMessageReceivedAsync;
+            twitchClient.OnChatCommandReceived += Client_OnChatCommandReceived;
 
             twitchClient.Connect();
         }
@@ -54,11 +56,6 @@ namespace simbot.Twitch
 
         private async void Client_OnMessageReceivedAsync(object sender, OnMessageReceivedArgs e)
         {
-            // commands
-            if (e.ChatMessage.Message.Trim().ToLower()[0] == '!')
-                await HandleCommands(e.ChatMessage.Message.Trim().ToLower().Remove(0, 1));
-
-            // some stuff
             if (!e.ChatMessage.Message.ToLower().Contains(e.ChatMessage.BotUsername.ToLower()))
                 return;
 
@@ -71,8 +68,11 @@ namespace simbot.Twitch
                     await discordClient.SendMessageAsync(discordChannel, $"<@{user.Key}> Twitch message: \"{e.ChatMessage.Message}\" by {e.ChatMessage.DisplayName}");
             }
         }
-        private async Task HandleCommands(string command)
+
+        private async void Client_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
         {
+            var command = e.Command.CommandText;
+
             foreach (var dynamicCommand in DynamicCommands.Commands)
             {
                 if (command == dynamicCommand.Command)
