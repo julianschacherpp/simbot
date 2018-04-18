@@ -89,6 +89,21 @@ namespace simbot.Twitch
                 else
                     SendMessage(uptime.ToString());
             }
+
+            if (command == "help")
+            {
+                var availableCommands = "Available commands:";
+
+                // Add in-code commands.
+                availableCommands += " !uptime";
+
+                // Add dynamic commands.
+                foreach (var dynamicCommand in DynamicCommands.Commands)
+                {
+                    availableCommands += " !" + dynamicCommand.Command;
+                }
+                SendMessage(availableCommands);
+            }
         }
     }
 }
