@@ -10,6 +10,7 @@ namespace simbot.Discord
 
     public class TwitchInfoDependencies
     {
+        internal StreamerLiveNotificationUsers StreamerLiveNotificationUsers { get; set; }
         internal Twitch.Api Api { get; set; }
     }
 

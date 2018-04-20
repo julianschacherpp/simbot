@@ -8,6 +8,7 @@ namespace simbot.Discord
 {
     public class Bot
     {
+
         Config.Config config;
         DiscordClient discord;
         CommandsNextModule commands;
@@ -15,6 +16,7 @@ namespace simbot.Discord
         private ulong mainChatChannel;
         private ulong twitchChatChannel;
         private bool lastIsOnlineState;
+        StreamerLiveNotificationUsers StreamerLiveNotificationUsers { get; set; } = new StreamerLiveNotificationUsers();
 
 
         public Bot(Config.Config config)
@@ -40,6 +42,7 @@ namespace simbot.Discord
                 });
                 d.AddInstance(new Discord.TwitchInfoDependencies()
                 {
+                    StreamerLiveNotificationUsers = StreamerLiveNotificationUsers,
                     Api = twitch.Api
                 });
                 d.AddInstance(new Discord.TwitchCommandManagementDependencies()
@@ -89,7 +92,13 @@ namespace simbot.Discord
 
         private async Task StreamerGoesOnlineHandler()
         {
-            var message = "// Leios is live!";
+            var message = "// Leios is live!\n";
+            foreach(var user in StreamerLiveNotificationUsers.Users)
+            {
+                if (user.Value)
+                    message += $"<@{user.Key}> ";
+            }
+
             Log.Console.Log(Log.Category.Discord, message);
             await discord.SendMessageAsync(await discord.GetChannelAsync(mainChatChannel), message);
         }
