@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace simbot.Twitch
         private Config.Config config;
         private readonly ConnectionCredentials credentials;
         private TwitchClient twitchClient;
-        private Api api; 
+        private Api api;
         private DiscordClient discordClient;
         public NotificationUsers NotificationUsers { get; set; }
         public DynamicCommands DynamicCommands { get; set; }
@@ -42,6 +43,8 @@ namespace simbot.Twitch
             twitchClient.OnChatCommandReceived += Client_OnChatCommandReceived;
 
             twitchClient.Connect();
+
+            var reconnectTask = this.RunPeriodicallyWaitFirst(twitchClient.Reconnect, TimeSpan.FromHours(6));
         }
 
         public void Disconnect() => twitchClient.Disconnect();
@@ -103,6 +106,15 @@ namespace simbot.Twitch
                     availableCommands += " !" + dynamicCommand.Command;
                 }
                 SendMessage(availableCommands);
+            }
+        }
+
+        private async Task RunPeriodicallyWaitFirst(Action action, TimeSpan interval)
+        {
+            while (true)
+            {
+                await Task.Delay(interval);
+                action();
             }
         }
     }
