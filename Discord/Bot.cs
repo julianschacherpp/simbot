@@ -92,7 +92,7 @@ namespace simbot.Discord
 
         private async Task StreamerGoesOnlineHandler()
         {
-            var message = "// Leios is live!\n";
+            var message = $"// Leios is live!\n<@&458730507530928138>\nLink: https://www.twitch.tv/simuleios\n";
             foreach(var user in StreamerLiveNotificationUsers.Users)
             {
                 if (user.Value)
